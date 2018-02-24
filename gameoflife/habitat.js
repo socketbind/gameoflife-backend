@@ -98,7 +98,7 @@ class Habitat {
     const result = emptyArrayWithDimensions(this.w, this.h);
     for (let j = 0; j < this.h; j += 1) {
       for (let i = 0; i < this.w; i += 1) {
-        result[j][i] = fn(this.neighbourCount(i, j)) ? 1 : 0;
+        result[j][i] = fn(this.aliveAt(i, j), this.neighbourCount(i, j)) ? 1 : 0;
       }
     }
     return Habitat.fromCells(result);

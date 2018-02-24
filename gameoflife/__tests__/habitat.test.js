@@ -115,7 +115,28 @@ test('neighbor count is correct', () => {
   expect(habitat.neighbourCount(2, 2)).toEqual(4);
 });
 
-test('map works correctly', () => {
+test('map function gets called correctly', () => {
+  const originalArray = [
+    [1, 0, 1],
+    [0, 1, 0],
+    [0, 1, 1],
+  ];
+  const habitat = Habitat.fromCells(originalArray);
+  const mockFn = jest.fn()
+    .mockReturnValue(false);
+
+  const newHabitat = habitat.map(mockFn);
+  expect(newHabitat.cells).toEqual([[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
+
+  expect(mockFn.mock.calls).toHaveLength(9);
+  expect(mockFn.mock.calls).toEqual([
+    [true, 4], [false, 5], [true, 4],
+    [false, 5], [true, 4], [false, 5],
+    [false, 5], [true, 4], [true, 4],
+  ]);
+});
+
+test('map function return value works correctly', () => {
   const originalArray = [
     [1, 0, 1],
     [0, 1, 0],
