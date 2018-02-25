@@ -15,6 +15,11 @@
     "lint": "eslint gameoflife/"
   },
   "jest": {
-    "testRegex": "\/__tests__\/.*\\.(test|spec)\\.jsx?$"
+    "testRegex": "/__tests__/.*\\.(test|spec)\\.jsx?$"
+  },
+  "dependencies": {
+    "api-error-handler": "^1.0.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
   }
 }
