@@ -46,6 +46,9 @@ function emptyArrayWithSize(w, h) {
   const arr = new Array(h);
   for (let j = 0; j < h; j += 1) {
     arr[j] = new Array(w);
+    for (let i = 0; i < w; i += 1) {
+      arr[j][i] = 0;
+    }
   }
   return arr;
 }

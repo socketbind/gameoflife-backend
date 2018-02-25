@@ -1,7 +1,7 @@
 const simulation = require('../simulation');
 const rules = require('../rules');
 const habitat = require('../habitat');
-const serializer = require('./utils/habitat_snapshot_serializer');
+const serializer = require('../test/habitat_snapshot_serializer');
 
 expect.addSnapshotSerializer(serializer);
 

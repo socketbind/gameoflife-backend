@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parses lines correctly: initial status after parseLines 1`] = `
+_____
+_***_
+_____
+
+`;

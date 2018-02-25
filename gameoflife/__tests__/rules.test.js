@@ -12,7 +12,7 @@ test('adheres to original rules', () => {
   expect(rules.classic(true, 2)).toEqual(true);
 
   // Any live cell with more than three live neighbours dies, as if by overpopulation.
-  for (let i = 3; i <= 9; i++) {
+  for (let i = 3; i <= 9; i += 1) {
     expect(rules.classic(true, 3)).toEqual(true);
   }
 
