@@ -47,9 +47,9 @@ test('allows creating custom rules', () => {
 });
 
 test('fromJson() defaults to classic', () => {
-  expect(rules.fromJson({}).name).toEqual('ClassicRules');
-  expect(rules.fromJson({ rules: { classic: true } }).name).toEqual('ClassicRules');
-  expect(rules.fromJson({ somethingelse: true }).name).toEqual('ClassicRules');
+  expect(rules.fromJson({}).constructor.name).toEqual('ClassicRules');
+  expect(rules.fromJson({ rules: { classic: true } }).constructor.name).toEqual('ClassicRules');
+  expect(rules.fromJson({ somethingelse: true }).constructor.name).toEqual('ClassicRules');
 });
 
 test('fromJson() deserializes custom properly', () => {

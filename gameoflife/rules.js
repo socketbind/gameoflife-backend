@@ -2,7 +2,7 @@
  * Represents the classic rules of Game of Life as described by Jon von Neumann.
  */
 class ClassicRules {
-  static cellSurvives(alive, neighbourCount) {
+  cellSurvives(alive, neighbourCount) {
     if (alive) {
       if (neighbourCount < 2) { // underpopulation
         return false;
@@ -22,10 +22,12 @@ class ClassicRules {
    * Return the JSON representation of classic rules.
    * @returns {Object} JSON representation
    */
-  static toJson() {
+  toJson() {
     return { rules: { classic: true } };
   }
 }
+
+const classicRules = new ClassicRules();
 
 /**
  * Represents custom rules for the Game of Life.
@@ -64,7 +66,7 @@ class CustomRules {
  * @returns {object} object representing the classical rules of the game of life
  */
 function classic() {
-  return ClassicRules;
+  return classicRules;
 }
 
 /**
