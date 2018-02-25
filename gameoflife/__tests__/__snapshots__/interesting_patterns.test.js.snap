@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the blinker pattern should work correctly: blinkerNextGeneration 1`] = `
+Array [
+  Array [
+    0,
+    0,
+    0,
+    0,
+    0,
+  ],
+  Array [
+    0,
+    0,
+    1,
+    0,
+    0,
+  ],
+  Array [
+    0,
+    0,
+    1,
+    0,
+    0,
+  ],
+  Array [
+    0,
+    0,
+    1,
+    0,
+    0,
+  ],
+  Array [
+    0,
+    0,
+    0,
+    0,
+    0,
+  ],
+]
+`;
