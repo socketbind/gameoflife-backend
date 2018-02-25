@@ -14,7 +14,7 @@ test('allows creating a basic blinker simulation', () => {
     [0, 0, 0, 0, 0],
   ]);
 
-  const blinkerSimulation = new simulation.Simulation(blinkerCells, rules.classic, 'Some description');
+  const blinkerSimulation = new simulation.Simulation(blinkerCells, rules.classic(), 'Some description');
   expect(blinkerSimulation).toBeDefined();
 
   const nextState = blinkerSimulation.nextState();

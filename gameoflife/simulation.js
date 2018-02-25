@@ -15,7 +15,7 @@ class Simulation {
   }
 
   nextState() {
-    this.habitat = this.habitat.map(this.used_rule);
+    this.habitat = this.habitat.applyRules(this.used_rule);
     return this.habitat;
   }
 }

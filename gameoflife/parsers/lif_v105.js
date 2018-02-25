@@ -123,7 +123,7 @@ function parseLines(lines) {
   const blocks = [];
   let insideBlock = false;
 
-  let usedRules = rules.classic;
+  let usedRules = rules.classic();
 
   lines.forEach((line) => {
     if (insideBlock) {
@@ -141,7 +141,7 @@ function parseLines(lines) {
       blocks.push({ x: coordinates[0], y: coordinates[1], rows: [] });
       insideBlock = true;
     } else if (line.startsWith('#N')) { // classic rules
-      usedRules = rules.classic;
+      usedRules = rules.classic();
     } else if (RULE_REGEX.test(line)) { // custom rules
       usedRules = parseCustomRuleHashR(line);
     }

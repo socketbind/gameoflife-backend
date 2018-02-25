@@ -15,10 +15,10 @@ test('the blinker pattern should work correctly', () => {
 
   const blinkerHabitat = habitat.fromCells(blinkerCells);
 
-  const newHabitat = blinkerHabitat.map(rules.classic);
+  const newHabitat = blinkerHabitat.applyRules(rules.classic());
   expect(newHabitat).toMatchSnapshot('blinkerNextGeneration');
 
-  const newerHabitat = newHabitat.map(rules.classic);
+  const newerHabitat = newHabitat.applyRules(rules.classic());
   expect(newerHabitat.cells).toEqual(blinkerCells);
 });
 
@@ -32,7 +32,7 @@ test('the block pattern stays the same', () => {
 
   const blockHabitat = habitat.fromCells(blockCells);
 
-  const newHabitat = blockHabitat.map(rules.classic);
+  const newHabitat = blockHabitat.applyRules(rules.classic());
   expect(newHabitat.cells).toEqual(blockCells);
 });
 
@@ -46,10 +46,10 @@ test('the glider pattern travels correctly through the habitat', () => {
     [0, 0, 0, 0, 0],
   ];
   const generation0 = habitat.fromCells(gliderCells);
-  const generation1 = generation0.map(rules.classic);
-  const generation2 = generation1.map(rules.classic);
-  const generation3 = generation2.map(rules.classic);
-  const generation4 = generation3.map(rules.classic);
+  const generation1 = generation0.applyRules(rules.classic());
+  const generation2 = generation1.applyRules(rules.classic());
+  const generation3 = generation2.applyRules(rules.classic());
+  const generation4 = generation3.applyRules(rules.classic());
 
   expect(generation0).toMatchSnapshot('gliderGeneration0');
   expect(generation1).toMatchSnapshot('gliderGeneration1');

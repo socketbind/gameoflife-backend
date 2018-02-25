@@ -182,27 +182,27 @@ test('parses valid hash P lines properly', () => {
 });
 
 test('parses valid hash R lines properly', () => {
-  const func = parser.parseCustomRuleHashR('#R 125/36');
+  const rules = parser.parseCustomRuleHashR('#R 125/36');
 
-  expect(func(true, 0)).toEqual(false);
-  expect(func(true, 1)).toEqual(true);
-  expect(func(true, 2)).toEqual(true);
-  expect(func(true, 3)).toEqual(false);
-  expect(func(true, 4)).toEqual(false);
-  expect(func(true, 5)).toEqual(true);
-  expect(func(true, 6)).toEqual(false);
-  expect(func(true, 7)).toEqual(false);
-  expect(func(true, 8)).toEqual(false);
+  expect(rules.cellSurvives(true, 0)).toEqual(false);
+  expect(rules.cellSurvives(true, 1)).toEqual(true);
+  expect(rules.cellSurvives(true, 2)).toEqual(true);
+  expect(rules.cellSurvives(true, 3)).toEqual(false);
+  expect(rules.cellSurvives(true, 4)).toEqual(false);
+  expect(rules.cellSurvives(true, 5)).toEqual(true);
+  expect(rules.cellSurvives(true, 6)).toEqual(false);
+  expect(rules.cellSurvives(true, 7)).toEqual(false);
+  expect(rules.cellSurvives(true, 8)).toEqual(false);
 
-  expect(func(false, 0)).toEqual(false);
-  expect(func(false, 1)).toEqual(false);
-  expect(func(false, 2)).toEqual(false);
-  expect(func(false, 3)).toEqual(true);
-  expect(func(false, 4)).toEqual(false);
-  expect(func(false, 5)).toEqual(false);
-  expect(func(false, 6)).toEqual(true);
-  expect(func(false, 7)).toEqual(false);
-  expect(func(false, 8)).toEqual(false);
+  expect(rules.cellSurvives(false, 0)).toEqual(false);
+  expect(rules.cellSurvives(false, 1)).toEqual(false);
+  expect(rules.cellSurvives(false, 2)).toEqual(false);
+  expect(rules.cellSurvives(false, 3)).toEqual(true);
+  expect(rules.cellSurvives(false, 4)).toEqual(false);
+  expect(rules.cellSurvives(false, 5)).toEqual(false);
+  expect(rules.cellSurvives(false, 6)).toEqual(true);
+  expect(rules.cellSurvives(false, 7)).toEqual(false);
+  expect(rules.cellSurvives(false, 8)).toEqual(false);
 });
 
 test('parses lines correctly', () => {
@@ -222,25 +222,25 @@ test('parses lines correctly', () => {
   expect(result).toBeInstanceOf(simulation.Simulation);
   expect(result.description).toEqual('some description\nnext line of description');
 
-  expect(result.used_rule(true, 0)).toEqual(false);
-  expect(result.used_rule(true, 1)).toEqual(true);
-  expect(result.used_rule(true, 2)).toEqual(true);
-  expect(result.used_rule(true, 3)).toEqual(false);
-  expect(result.used_rule(true, 4)).toEqual(false);
-  expect(result.used_rule(true, 5)).toEqual(true);
-  expect(result.used_rule(true, 6)).toEqual(false);
-  expect(result.used_rule(true, 7)).toEqual(false);
-  expect(result.used_rule(true, 8)).toEqual(false);
+  expect(result.used_rule.cellSurvives(true, 0)).toEqual(false);
+  expect(result.used_rule.cellSurvives(true, 1)).toEqual(true);
+  expect(result.used_rule.cellSurvives(true, 2)).toEqual(true);
+  expect(result.used_rule.cellSurvives(true, 3)).toEqual(false);
+  expect(result.used_rule.cellSurvives(true, 4)).toEqual(false);
+  expect(result.used_rule.cellSurvives(true, 5)).toEqual(true);
+  expect(result.used_rule.cellSurvives(true, 6)).toEqual(false);
+  expect(result.used_rule.cellSurvives(true, 7)).toEqual(false);
+  expect(result.used_rule.cellSurvives(true, 8)).toEqual(false);
 
-  expect(result.used_rule(false, 0)).toEqual(false);
-  expect(result.used_rule(false, 1)).toEqual(false);
-  expect(result.used_rule(false, 2)).toEqual(false);
-  expect(result.used_rule(false, 3)).toEqual(true);
-  expect(result.used_rule(false, 4)).toEqual(false);
-  expect(result.used_rule(false, 5)).toEqual(false);
-  expect(result.used_rule(false, 6)).toEqual(true);
-  expect(result.used_rule(false, 7)).toEqual(false);
-  expect(result.used_rule(false, 8)).toEqual(false);
+  expect(result.used_rule.cellSurvives(false, 0)).toEqual(false);
+  expect(result.used_rule.cellSurvives(false, 1)).toEqual(false);
+  expect(result.used_rule.cellSurvives(false, 2)).toEqual(false);
+  expect(result.used_rule.cellSurvives(false, 3)).toEqual(true);
+  expect(result.used_rule.cellSurvives(false, 4)).toEqual(false);
+  expect(result.used_rule.cellSurvives(false, 5)).toEqual(false);
+  expect(result.used_rule.cellSurvives(false, 6)).toEqual(true);
+  expect(result.used_rule.cellSurvives(false, 7)).toEqual(false);
+  expect(result.used_rule.cellSurvives(false, 8)).toEqual(false);
 
   expect(result.habitat).toMatchSnapshot('initial status after parseLines');
 });

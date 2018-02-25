@@ -83,16 +83,16 @@ class Habitat {
   }
 
   /**
-   * Execute mapping function on cells and create a new habitat from the results.
-   * @param fn mapping function gets neighbor count as first parameter and
-   * returns whether the cell is alive or dead
+   * Execute the specified rules on cells contained in this habitat
+   * and create a new habitat from the results.
+   * @param rules an arbitrary object with a cellSurvives(alive, neighbourCount) method
    * @returns {Habitat} new habitat containing the resulting cells
    */
-  map(fn) {
+  applyRules(rules) {
     const result = utils.emptyArrayWithSize(this.w, this.h);
     for (let j = 0; j < this.h; j += 1) {
       for (let i = 0; i < this.w; i += 1) {
-        result[j][i] = fn(this.aliveAt(i, j), this.neighbourCount(i, j)) ? 1 : 0;
+        result[j][i] = rules.cellSurvives(this.aliveAt(i, j), this.neighbourCount(i, j)) ? 1 : 0;
       }
     }
     return Habitat.fromCells(result);

@@ -1,39 +1,64 @@
 /**
- * Mapping function for the classical Game of Life rules described by John von Neumann.
- * @param alive cell status as passed by the map() function in the Habitat class
- * @param neighbourCount neighbor count as passed bby the map() function in the Habitat class
- * @returns {boolean} whether the cell will survive to the next generation or not
+ * Represents the classic rules of Game of Life as described by Jon von Neumann.
  */
-function classic(alive, neighbourCount) {
-  if (alive) {
-    if (neighbourCount < 2) { // underpopulation
-      return false;
-    } else if (neighbourCount <= 3) { // survival
+class ClassicRules {
+  static cellSurvives(alive, neighbourCount) {
+    if (alive) {
+      if (neighbourCount < 2) { // underpopulation
+        return false;
+      } else if (neighbourCount <= 3) { // survival
+        return true;
+      }
+
+      return false; // overpopulation
+    } else if (neighbourCount === 3) { // reproduction
       return true;
     }
 
-    return false; // overpopulation
-  } else if (neighbourCount === 3) { // reproduction
-    return true;
+    return false;
   }
-
-  return false;
 }
 
 /**
- * Returns a mapping function that adheres to the specified survival and birth count.
- * @param survivalCounts count of neighbors that is necessary for a cell's survival
- * @param birthCounts count of neighbors that is necessary allow a dead cell to become alive
- * @returns {function} mapping function
+ * Represents custom rules for the Game of Life.
  */
-function custom(survivalCounts, birthCounts) {
-  return (alive, neighborCount) => {
+class CustomRules {
+  /**
+   * Creates a custom rule instance.
+   * @param survivalCounts count of neighbors that is necessary for a cell's survival
+   * @param birthCounts count of neighbors that is necessary allow a dead cell to become alive
+   */
+  constructor(survivalCounts, birthCounts) {
+    this.survivalCounts = survivalCounts;
+    this.birthCounts = birthCounts;
+  }
+
+  cellSurvives(alive, neighbourCount) {
     if (alive) {
-      return survivalCounts.includes(neighborCount);
+      return this.survivalCounts.includes(neighbourCount);
     }
 
-    return birthCounts.includes(neighborCount);
-  };
+    return this.birthCounts.includes(neighbourCount);
+  }
+}
+
+/**
+ * Returns an object which represents the classical Game of Life rules described
+ * by John von Neumann.
+ * @returns {object} object representing the classical rules of the game of life
+ */
+function classic() {
+  return ClassicRules;
+}
+
+/**
+ * Returns an object which represents custom game rules with the specified parameters.
+ * @param survivalCounts count of neighbors that is necessary for a cell's survival
+ * @param birthCounts count of neighbors that is necessary allow a dead cell to become alive
+ * @returns {object} object representing custom rules for the game of life
+ */
+function custom(survivalCounts, birthCounts) {
+  return new CustomRules(survivalCounts, birthCounts);
 }
 
 module.exports = {

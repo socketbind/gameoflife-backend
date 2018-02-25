@@ -122,14 +122,13 @@ test('map function gets called correctly', () => {
     [0, 1, 1],
   ];
   const habitat = Habitat.fromCells(originalArray);
-  const mockFn = jest.fn()
-    .mockReturnValue(false);
+  const mockRules = { cellSurvives: jest.fn().mockReturnValue(false) };
 
-  const newHabitat = habitat.map(mockFn);
+  const newHabitat = habitat.applyRules(mockRules);
   expect(newHabitat.cells).toEqual([[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
 
-  expect(mockFn.mock.calls).toHaveLength(9);
-  expect(mockFn.mock.calls).toEqual([
+  expect(mockRules.cellSurvives.mock.calls).toHaveLength(9);
+  expect(mockRules.cellSurvives.mock.calls).toEqual([
     [true, 4], [false, 5], [true, 4],
     [false, 5], [true, 4], [false, 5],
     [false, 5], [true, 4], [true, 4],
@@ -145,16 +144,18 @@ test('map function return value works correctly', () => {
   const habitat = Habitat.fromCells(originalArray);
   expect(habitat.cells).toEqual(originalArray);
 
-  const newHabitat1 = habitat.map(() => true);
+  const newHabitat1 = habitat.applyRules({ cellSurvives: () => true });
   expect(newHabitat1.cells).toEqual([[1, 1, 1], [1, 1, 1], [1, 1, 1]]);
 
-  const newHabitat2 = habitat.map(() => false);
+  const newHabitat2 = habitat.applyRules({ cellSurvives: () => false });
   expect(newHabitat2.cells).toEqual([[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
 
   let flop = true;
-  const newHabitat3 = habitat.map(() => {
-    flop = !flop;
-    return flop;
+  const newHabitat3 = habitat.applyRules({
+    cellSurvives: () => {
+      flop = !flop;
+      return flop;
+    },
   });
   expect(newHabitat3.cells).toEqual([[0, 1, 0], [1, 0, 1], [0, 1, 0]]);
 });
