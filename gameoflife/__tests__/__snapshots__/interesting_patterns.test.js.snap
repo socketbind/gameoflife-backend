@@ -1,41 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`the blinker pattern should work correctly: blinkerNextGeneration 1`] = `
-Array [
-  Array [
-    0,
-    0,
-    0,
-    0,
-    0,
-  ],
-  Array [
-    0,
-    0,
-    1,
-    0,
-    0,
-  ],
-  Array [
-    0,
-    0,
-    1,
-    0,
-    0,
-  ],
-  Array [
-    0,
-    0,
-    1,
-    0,
-    0,
-  ],
-  Array [
-    0,
-    0,
-    0,
-    0,
-    0,
-  ],
-]
+_____
+__*__
+__*__
+__*__
+_____
+
+`;
+
+exports[`the glider pattern travels correctly through the habitat: gliderGeneration0 1`] = `
+_____
+__*__
+___*_
+_***_
+_____
+
+`;
+
+exports[`the glider pattern travels correctly through the habitat: gliderGeneration1 1`] = `
+_____
+_____
+_*_*_
+__**_
+__*__
+
+`;
+
+exports[`the glider pattern travels correctly through the habitat: gliderGeneration2 1`] = `
+_____
+_____
+___*_
+_*_*_
+__**_
+
+`;
+
+exports[`the glider pattern travels correctly through the habitat: gliderGeneration3 1`] = `
+_____
+_____
+__*__
+___**
+__**_
+
+`;
+
+exports[`the glider pattern travels correctly through the habitat: gliderGeneration4 1`] = `
+_____
+_____
+___*_
+____*
+__***
+
 `;

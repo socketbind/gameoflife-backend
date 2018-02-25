@@ -13,5 +13,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint gameoflife/"
+  },
+  "jest": {
+    "testRegex": "\/__tests__\/.*\\.(test|spec)\\.jsx?$"
   }
 }
