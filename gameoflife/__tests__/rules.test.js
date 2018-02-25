@@ -45,3 +45,16 @@ test('allows creating custom rules', () => {
   expect(customRules.cellSurvives(false, 7)).toEqual(false);
   expect(customRules.cellSurvives(false, 8)).toEqual(false);
 });
+
+test('fromJson() defaults to classic', () => {
+  expect(rules.fromJson({}).name).toEqual('ClassicRules');
+  expect(rules.fromJson({ rules: { classic: true } }).name).toEqual('ClassicRules');
+  expect(rules.fromJson({ somethingelse: true }).name).toEqual('ClassicRules');
+});
+
+test('fromJson() deserializes custom properly', () => {
+  const result = rules.fromJson({ rules: { custom: { survival: [1, 3, 5], birth: [2, 6] } } });
+  expect(result.constructor.name).toEqual('CustomRules');
+  expect(result.survivalCounts).toEqual([1, 3, 5]);
+  expect(result.birthCounts).toEqual([2, 6]);
+});

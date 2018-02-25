@@ -17,6 +17,14 @@ class ClassicRules {
 
     return false;
   }
+
+  /**
+   * Return the JSON representation of classic rules.
+   * @returns {Object} JSON representation
+   */
+  static toJson() {
+    return { rules: { classic: true } };
+  }
 }
 
 /**
@@ -40,6 +48,14 @@ class CustomRules {
 
     return this.birthCounts.includes(neighbourCount);
   }
+
+  /**
+   * Return the JSON representation of custom rules.
+   * @returns {Object} JSON representation
+   */
+  static toJson() {
+    return { rules: { custom: { survival: this.survivalCounts, birth: this.birthCounts } } };
+  }
 }
 
 /**
@@ -55,13 +71,36 @@ function classic() {
  * Returns an object which represents custom game rules with the specified parameters.
  * @param survivalCounts count of neighbors that is necessary for a cell's survival
  * @param birthCounts count of neighbors that is necessary allow a dead cell to become alive
- * @returns {object} object representing custom rules for the game of life
+ * @returns {Object} object representing custom rules for the game of life
  */
 function custom(survivalCounts, birthCounts) {
   return new CustomRules(survivalCounts, birthCounts);
 }
 
+/**
+ * Deserializes rules information from the specified object.
+ * @param obj source object
+ * @returns {Object} rule object
+ */
+function fromJson(obj) {
+  if (obj.rules &&
+    obj.rules.custom &&
+    obj.rules.custom.survival &&
+    obj.rules.custom.survival.constructor === Array &&
+    obj.rules.custom.birth &&
+    obj.rules.custom.birth.constructor === Array
+  ) {
+    return custom(
+      obj.rules.custom.survival.filter(i => typeof i === 'number'),
+      obj.rules.custom.birth.filter(i => typeof i === 'number')
+    );
+  }
+
+  return classic();
+}
+
 module.exports = {
   classic,
   custom,
+  fromJson
 };
