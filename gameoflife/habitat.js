@@ -27,6 +27,16 @@ class ZeroSizeHabitat extends Error {
   }
 }
 
+/**
+ * Thrown when unable to deserialize a habitat.
+ */
+class HabitatDeserializationError extends Error {
+  constructor(msg) {
+    super(`unable to deserialize habitat: ${msg}`);
+  }
+}
+
+
 class Habitat {
   /**
    * Creates a new habitat.
@@ -99,6 +109,36 @@ class Habitat {
   }
 
   /**
+   * Returns the JSON represnetation of this habitat.
+   * @returns {object} JSON representation
+   */
+  toJson() {
+    const compactCells = this.cells
+      .map(row => row.map(c => (c > 0 ? '*' : '_')).join(''));
+
+    return { habitat: compactCells };
+  }
+
+  /**
+   * Deserializes a Habitat instance from the specified object.
+   * @param obj JSON object
+   * @returns {Habitat} habitat instance
+   */
+  static fromJson(obj) {
+    if (!obj.habitat) {
+      throw new HabitatDeserializationError('missing habitat key');
+    }
+
+    if (obj.habitat.constructor !== Array) {
+      throw new HabitatDeserializationError('habitat is not an array');
+    }
+
+    const cells = obj.habitat.map(row => row.split('').map(c => (c === '*' ? 1 : 0)));
+
+    return Habitat.fromCells(cells);
+  }
+
+  /**
    * Creates a new habitat containing the specified cells.
    * @param cells cells encoded as an array of rows
    * @returns {Habitat} habitat instance containing the cells
@@ -145,9 +185,11 @@ class Habitat {
 }
 
 module.exports = {
+  fromJson: Habitat.fromJson,
   fromCells: Habitat.fromCells,
   empty: Habitat.empty,
   EmptyArrayError,
   MalformedArrayError,
   ZeroSizeHabitat,
+  HabitatDeserializationError,
 };

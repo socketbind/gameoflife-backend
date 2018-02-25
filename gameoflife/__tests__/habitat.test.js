@@ -115,7 +115,7 @@ test('neighbor count is correct', () => {
   expect(habitat.neighbourCount(2, 2)).toEqual(4);
 });
 
-test('map function gets called correctly', () => {
+test('when rules get applied cellSurvives is called correctly in succession', () => {
   const originalArray = [
     [1, 0, 1],
     [0, 1, 0],
@@ -135,7 +135,7 @@ test('map function gets called correctly', () => {
   ]);
 });
 
-test('map function return value works correctly', () => {
+test('when rules get applied cellSurvives return value if handled correctly', () => {
   const originalArray = [
     [1, 0, 1],
     [0, 1, 0],
@@ -158,4 +158,37 @@ test('map function return value works correctly', () => {
     },
   });
   expect(newHabitat3.cells).toEqual([[0, 1, 0], [1, 0, 1], [0, 1, 0]]);
+});
+
+test('toJson serializes correctly', () => {
+  const cells = [
+    [1, 0, 1],
+    [0, 1, 0],
+    [0, 1, 1],
+  ];
+  const habitat = Habitat.fromCells(cells);
+
+  expect(habitat.toJson()).toEqual({ habitat: ['*_*', '_*_', '_**'] });
+});
+
+test('fromJson deserializes correctly', () => {
+  const obj = { habitat: ['*_*', '_*_', '_**'] };
+
+  const habitat = Habitat.fromJson(obj);
+
+  expect(habitat.cells).toEqual([
+    [1, 0, 1],
+    [0, 1, 0],
+    [0, 1, 1],
+  ]);
+});
+
+test('fromJson throws correct exception', () => {
+  expect(() => {
+    Habitat.fromJson({});
+  }).toThrow(/missing habitat key/);
+
+  expect(() => {
+    Habitat.fromJson({ habitat: 'abc' });
+  }).toThrow(/habitat is not an array/);
 });
