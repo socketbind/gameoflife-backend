@@ -1,3 +1,5 @@
+const utils = require('./utils');
+
 /**
  * Thrown when an empty array is provided as a paramter for creation factory functions.
  */
@@ -25,14 +27,6 @@ class ZeroSizeHabitat extends Error {
   }
 }
 
-function emptyArrayWithDimensions(w, h) {
-  const arr = new Array(h);
-  for (let j = 0; j < h; j += 1) {
-    arr[j] = new Array(w);
-  }
-  return arr;
-}
-
 class Habitat {
   /**
    * Creates a new habitat.
@@ -47,7 +41,7 @@ class Habitat {
     if (cells) {
       this.cells = cells;
     } else {
-      this.cells = emptyArrayWithDimensions(w, h);
+      this.cells = utils.emptyArrayWithSize(w, h);
     }
   }
 
@@ -95,7 +89,7 @@ class Habitat {
    * @returns {Habitat} new habitat containing the resulting cells
    */
   map(fn) {
-    const result = emptyArrayWithDimensions(this.w, this.h);
+    const result = utils.emptyArrayWithSize(this.w, this.h);
     for (let j = 0; j < this.h; j += 1) {
       for (let i = 0; i < this.w; i += 1) {
         result[j][i] = fn(this.aliveAt(i, j), this.neighbourCount(i, j)) ? 1 : 0;
