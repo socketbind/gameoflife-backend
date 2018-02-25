@@ -11,7 +11,7 @@
     "jest": "^22.4.2"
   },
   "scripts": {
-    "test": "jest --watchAll",
+    "test": "jest",
     "lint": "eslint gameoflife/"
   }
 }
