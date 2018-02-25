@@ -53,7 +53,6 @@ class Simulation {
 
     return new Simulation(initialHabitat, usedRules, obj.description);
   }
-
 }
 
 module.exports = {

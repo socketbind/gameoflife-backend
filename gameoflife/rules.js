@@ -94,7 +94,7 @@ function fromJson(obj) {
   ) {
     return custom(
       obj.rules.custom.survival.filter(i => typeof i === 'number'),
-      obj.rules.custom.birth.filter(i => typeof i === 'number')
+      obj.rules.custom.birth.filter(i => typeof i === 'number'),
     );
   }
 
@@ -104,5 +104,5 @@ function fromJson(obj) {
 module.exports = {
   classic,
   custom,
-  fromJson
+  fromJson,
 };
