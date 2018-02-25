@@ -20,6 +20,23 @@ function classic(alive, neighbourCount) {
   return false;
 }
 
+/**
+ * Returns a mapping function that adheres to the specified survival and birth count.
+ * @param survivalCounts count of neighbors that is necessary for a cell's survival
+ * @param birthCounts count of neighbors that is necessary allow a dead cell to become alive
+ * @returns {function} mapping function
+ */
+function custom(survivalCounts, birthCounts) {
+  return (alive, neighborCount) => {
+    if (alive) {
+      return survivalCounts.includes(neighborCount);
+    }
+
+    return birthCounts.includes(neighborCount);
+  };
+}
+
 module.exports = {
   classic,
+  custom,
 };
