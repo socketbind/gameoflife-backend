@@ -153,6 +153,11 @@ function parseLines(lines) {
   return new simulation.Simulation(habitat.fromCells(cells), usedRules, finalDescription);
 }
 
+/**
+ * Load simulaton from v1.05 .lif files.
+ * @param path absolute or relative path to .lif file
+ * @returns {Promise<Simulation>} resolves to simulation or rejects with an error
+ */
 function loadFile(path) {
   return utils.readLines(path)
     .then(parseLines);
