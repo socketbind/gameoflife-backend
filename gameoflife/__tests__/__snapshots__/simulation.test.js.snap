@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`allows creating a basic blinker simulation: blinkerNextState 1`] = `
+_____
+__*__
+__*__
+__*__
+_____
+
+`;
